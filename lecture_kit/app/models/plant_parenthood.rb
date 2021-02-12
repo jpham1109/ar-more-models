@@ -1,13 +1,15 @@
 class PlantParenthood < ActiveRecord::Base
+     before_save :cap_affection
+     #before_update
+     #after_initialize
 
-     belongs_to :plant_parent
+     belongs_to :person
      belongs_to :plant
 
-    # def plant_parents
-    #     # before ActiveRecord
-    #     PlantParent.all.select{|plant_parent| plant_parent == self.plant_parents}
-    #     # AR:
-    #     id_num = self.plant_parent_id
-    #     PlantParent.find(id_num)
-    # end
+   def cap_affection
+     self.affection = 11_000 if self.affection > 11_000
+   end 
+
 end
+
+# introduces a cap on the affection value at 11_000
